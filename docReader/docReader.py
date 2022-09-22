@@ -1,5 +1,3 @@
-from ast import main
-from asyncore import read
 from docx.api import Document
 import re
 import psycopg2

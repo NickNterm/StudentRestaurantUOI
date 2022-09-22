@@ -56,8 +56,8 @@ def get_all_meals(db=Depends(get_db)):
 
 @app.get("/program")
 def get_program(
-    start_date: Optional[str] = "20/9/2022",
-    end_date: Optional[str] = "22/9/2022",
+    start_date: Optional[str] = "1/1/2000",
+    end_date: Optional[str] = "1/1/2100",
     db=Depends(get_db),
 ):
     # return start_date
