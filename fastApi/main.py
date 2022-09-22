@@ -5,6 +5,7 @@ import models
 from database import engine, SessionLocal
 from fastapi.security import OAuth2PasswordBearer
 from datetime import *
+from fastapi.middleware.cors import CORSMiddleware
 
 api_keys = [
     "vP33IqweAwoS2v20xczvMOKDGrNDS8Y3Bb7ZV33lh6Y9Hn6w07mVSw3076GXVkkE"
@@ -22,6 +23,17 @@ def api_key_auth(api_key: str = Depends(oauth2_scheme)):
 
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -65,3 +77,4 @@ def get_program(
         models.Program.date >= datetime.strptime(start_date, '%d/%m/%Y'),
         models.Program.date <= datetime.strptime(end_date, '%d/%m/%Y'),
     ).all()
+

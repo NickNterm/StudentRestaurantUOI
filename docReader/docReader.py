@@ -1,7 +1,7 @@
 from docx.api import Document
 import re
 import psycopg2
-from dateutil.parser import parse
+from datetime import datetime
 
 conn = psycopg2.connect(database="StudentRestaurantUOI",
                         host="localhost",
@@ -122,7 +122,7 @@ def read_table(table):
                             # print('"extra1 Dish": "' + re.sub(' +', ' ', str(extra1).replace("\n", " ")) + '",')
                             # print('"extra2 Dish": "' + re.sub(' +', ' ', str(extra2).replace("\n", " ")) + '"')
                             # print("},")
-                    dt = parse(key+"/2022")
+                    dt = datetime.strptime(key+"/2022", "%d/%m/%Y")
                     sql = "INSERT INTO program (date, meal_type, first_dish, main_dish, special_dish, side_dish1, side_dish2) VALUES('"+str(dt)+"', '" + \
                         foodType+"', '"+str(firstDishId)+"', '"+str(mainDishId)+"', '"+str(specialDishId)+"', '"+str(sideDish1Id)+"', '"+str(sideDish2Id)+"')"
                     cursor = conn.cursor()
