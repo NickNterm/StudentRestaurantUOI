@@ -17,7 +17,7 @@ def read_meals():
     cursor.execute(postgreSQL_select_Query)
     meal_records = cursor.fetchall()
     for row in meal_records:
-        meals[row[1]] = row[0]
+        meals[row[1].upper()] = row[0]
 
 
 firstDishId = 0
@@ -62,8 +62,8 @@ def read_table(table):
 
                     all_fields_set = False
                     while not all_fields_set:
-                        if firstDish in meals.keys():
-                            firstDishId = meals[firstDish]
+                        if firstDish.upper() in meals.keys():
+                            firstDishId = meals[firstDish.upper()]
                         else:
                             sql_insert = "INSERT INTO meals (name) VALUES ('"+firstDish+"');"
                             cursor = conn.cursor()
@@ -72,8 +72,8 @@ def read_table(table):
                             cursor.close()
                             read_meals()
                             continue
-                        if mainDish in meals.keys():
-                            mainDishId = meals[mainDish]
+                        if mainDish.upper() in meals.keys():
+                            mainDishId = meals[mainDish.upper()]
                         else:
                             sql_insert = "INSERT INTO meals (name) VALUES ('"+mainDish+"');"
                             cursor = conn.cursor()
@@ -82,8 +82,8 @@ def read_table(table):
                             cursor.close()
                             read_meals()
                             continue
-                        if specialDish in meals.keys():
-                            specialDishId = meals[specialDish]
+                        if specialDish.upper() in meals.keys():
+                            specialDishId = meals[specialDish.upper()]
                         else:
                             sql_insert = "INSERT INTO meals (name) VALUES ('"+specialDish+"');"
                             cursor = conn.cursor()
@@ -92,8 +92,8 @@ def read_table(table):
                             cursor.close()
                             read_meals()
                             continue
-                        if sideDish1 in meals.keys():
-                            sideDish1Id = meals[sideDish1]
+                        if sideDish1.upper() in meals.keys():
+                            sideDish1Id = meals[sideDish1.upper()]
                         else:
                             sql_insert = "INSERT INTO meals (name) VALUES ('"+sideDish1+"');"
                             cursor = conn.cursor()
@@ -102,8 +102,8 @@ def read_table(table):
                             cursor.close()
                             read_meals()
                             continue
-                        if sideDish2 in meals.keys():
-                            sideDish2Id = meals[sideDish2]
+                        if sideDish2.upper() in meals.keys():
+                            sideDish2Id = meals[sideDish2.upper()]
                             all_fields_set = True
                         else:
                             sql_insert = "INSERT INTO meals (name) VALUES ('"+sideDish2+"');"
