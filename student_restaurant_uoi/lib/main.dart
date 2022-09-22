@@ -3,8 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:student_restaurant_uoi/constants/colors.dart';
 import 'package:student_restaurant_uoi/pages/loading/loading_screen.dart';
 import 'package:student_restaurant_uoi/providers/meals_controller.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
 }
 
@@ -22,6 +28,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Student Restaurant UOI',
         theme: ThemeData(
+          useMaterial3: true,
+          appBarTheme: AppBarTheme.of(context).copyWith(
+            color: kPrimaryColor,
+            foregroundColor: Colors.white,
+            centerTitle: true,
+          ),
+          scaffoldBackgroundColor: kWhiteColor,
           primaryColor: kPrimaryColor,
         ),
         home: const LoadingScreen(),

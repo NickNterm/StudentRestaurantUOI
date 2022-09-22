@@ -1,1 +1,1 @@
-const baseUrl = "192.168.50.9/StudentRestaurant/";
+const baseUrl = "http://130.185.234.70:3338";
