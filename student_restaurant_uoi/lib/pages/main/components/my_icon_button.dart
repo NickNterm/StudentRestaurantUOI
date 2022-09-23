@@ -21,15 +21,10 @@ class MyIconButton extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            offset: const Offset(5, 5),
-            color: Colors.grey.withOpacity(0.3),
-            blurRadius: 7,
+            offset: const Offset(0, 7),
+            color: Colors.grey.withOpacity(0.4),
+            blurRadius: 8,
           ),
-          const BoxShadow(
-            offset: Offset(-5, -5),
-            color: Colors.white,
-            blurRadius: 7,
-          )
         ],
         borderRadius: BorderRadius.circular(15),
       ),
@@ -41,7 +36,7 @@ class MyIconButton extends StatelessWidget {
               onPress();
             },
             child: Ink(
-              color: kWhiteColor,
+              color: Colors.white,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

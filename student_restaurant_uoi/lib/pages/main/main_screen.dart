@@ -51,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Restaurant"),
+        title: const Text("Pame Lesxi UOI"),
       ),
       body: Column(
         children: [
@@ -85,7 +85,10 @@ class _MainScreenState extends State<MainScreen> {
           ),
           const Text(
             "Μεσημεριανό",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
           ),
           Expanded(
             child: PageView.builder(

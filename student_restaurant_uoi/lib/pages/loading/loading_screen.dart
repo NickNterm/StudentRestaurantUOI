@@ -26,17 +26,17 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
   }
 
   void setUp() async {
-    if (await hasNetwork()) {
-      getMeals(mealsCallback, onMealError);
-    } else {
-      const snackBar = SnackBar(
-        content: Text(
-          'Δεν υπάρχει σύνδεση στο διαδίκτυο',
-        ),
-      );
+    // if (await hasNetwork()) {
+    getMeals(mealsCallback, onMealError);
+    // } else {
+    //   const snackBar = SnackBar(
+    //     content: Text(
+    //       'Δεν υπάρχει σύνδεση στο διαδίκτυο',
+    //     ),
+    //   );
 
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
+    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // }
   }
 
   void onMealError() {
@@ -76,21 +76,49 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
   void programCallback(List<Program> program) {
     Provider.of<MealController>(context, listen: false).setProgram(program);
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (_) => const MainScreen()));
+      context,
+      MaterialPageRoute(
+        builder: (_) => const MainScreen(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
       body: Column(children: [
-        const SizedBox(height: 100),
-        Image.asset(
-          "assets/icons/icon.png",
-          width: 150,
+        const SizedBox(height: 150),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(33),
+          ),
+          child: Image.asset(
+            "assets/icons/icon.png",
+            width: 150,
+          ),
+        ),
+        const SizedBox(height: 20),
+        const Text(
+          "Pame Lesxi?",
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: kPrimaryColor,
+          ),
         ),
         const Spacer(),
-        const SpinKitPianoWave(color: kSecondaryColor),
+        const Text(
+          "Για τους φοιτητές που δεν ξέρουν να μαγειρεύουν",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: kPrimaryColor,
+            fontSize: 20,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(height: 20),
+        const SpinKitPulse(color: kPrimaryColor),
         const SizedBox(height: 100)
       ]),
     );

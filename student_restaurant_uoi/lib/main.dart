@@ -26,13 +26,14 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Student Restaurant UOI',
+        title: 'Pame Lesxi UOI',
         theme: ThemeData(
           useMaterial3: true,
           appBarTheme: AppBarTheme.of(context).copyWith(
-            color: kPrimaryColor,
-            foregroundColor: Colors.white,
             centerTitle: true,
+            elevation: 7,
+            surfaceTintColor: Colors.white,
+            shadowColor: Colors.grey.withOpacity(0.4),
           ),
           scaffoldBackgroundColor: kWhiteColor,
           primaryColor: kPrimaryColor,

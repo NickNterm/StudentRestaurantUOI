@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:student_restaurant_uoi/constants/colors.dart';
 import 'package:student_restaurant_uoi/models/meal.dart';
 import 'package:student_restaurant_uoi/providers/meals_controller.dart';
 
@@ -149,7 +148,7 @@ class _AllPlatesScreenState extends State<AllPlatesScreen> {
                             ),
                             padding: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
-                              color: kWhiteColor,
+                              color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
                                   offset: const Offset(0, 3),
