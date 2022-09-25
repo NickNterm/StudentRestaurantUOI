@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Pame Lesxi UOI',
         theme: ThemeData(
           useMaterial3: true,

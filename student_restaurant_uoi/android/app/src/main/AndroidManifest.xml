@@ -1,6 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.student_restaurant_uoi">
     <uses-permission android:name="android.permission.INTERNET" />
+    <queries>
+  <intent>
+    <action android:name="android.intent.action.SEND" />
+    <data android:mimeType="*/*" />
+  </intent>
+</queries>
    <application
         android:label="Pame Lesxi"
         android:name="${applicationName}"

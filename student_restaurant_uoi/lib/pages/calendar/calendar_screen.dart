@@ -53,11 +53,11 @@ class CalendarScreenState extends State<CalendarScreen> {
             },
             calendarStyle: CalendarStyle(
               selectedDecoration: const BoxDecoration(
-                color: kPrimaryColor,
+                color: kSecondaryColor,
                 shape: BoxShape.circle,
               ),
               todayDecoration: BoxDecoration(
-                color: kPrimaryColor.withOpacity(0.6),
+                color: kPrimaryColor.withOpacity(0.5),
                 shape: BoxShape.circle,
               ),
             ),

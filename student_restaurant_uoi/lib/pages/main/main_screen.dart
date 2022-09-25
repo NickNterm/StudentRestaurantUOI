@@ -4,6 +4,7 @@ import 'package:student_restaurant_uoi/models/meal.dart';
 import 'package:student_restaurant_uoi/models/program.dart';
 import 'package:student_restaurant_uoi/pages/all_plates/all_plates_screen.dart';
 import 'package:student_restaurant_uoi/pages/calendar/calendar_screen.dart';
+import 'package:student_restaurant_uoi/pages/info_screen.dart/info_screen.dart';
 import 'package:student_restaurant_uoi/providers/meals_controller.dart';
 
 import 'components/main_day_card.dart';
@@ -52,6 +53,19 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Pame Lesxi UOI"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const InfoScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.info_outline_rounded),
+          )
+        ],
       ),
       body: Column(
         children: [

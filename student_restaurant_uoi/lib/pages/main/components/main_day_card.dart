@@ -44,21 +44,6 @@ class MainDayCard extends StatelessWidget {
         children: [
           Column(
             children: [
-              // Container(
-              //   alignment: Alignment.center,
-              //   width: double.infinity,
-              //   height: 50,
-              //   decoration: const BoxDecoration(
-              //     borderRadius: BorderRadius.only(
-              //         topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-              //     color: kPrimaryColor,
-              //   ),
-              //   child: Text(
-              //     DateFormat("dd/MM/yy").format(day.date),
-              //     style: const TextStyle(
-              //         color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17),
-              //   ),
-              // ),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

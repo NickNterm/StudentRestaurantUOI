@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:student_restaurant_uoi/models/meal.dart';
 import 'package:student_restaurant_uoi/providers/meals_controller.dart';
 
+import 'components/meal_list_tile.dart';
+
 class AllPlatesScreen extends StatefulWidget {
   const AllPlatesScreen({Key? key}) : super(key: key);
 
@@ -88,20 +90,22 @@ class _AllPlatesScreenState extends State<AllPlatesScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.close,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              setState(
-                () {
-                  editingController.text = "";
-                  _filterSearchResults("");
-                },
-              );
-            },
-          ),
+          editingController.text.isNotEmpty
+              ? IconButton(
+                  icon: const Icon(
+                    Icons.close,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    setState(
+                      () {
+                        editingController.text = "";
+                        _filterSearchResults("");
+                      },
+                    );
+                  },
+                )
+              : Container(),
         ],
       ),
       body: SafeArea(
@@ -139,28 +143,7 @@ class _AllPlatesScreenState extends State<AllPlatesScreen> {
                       itemCount: filteredMeals.length,
                       itemBuilder: (context, index) {
                         Meal meal = filteredMeals[index];
-                        return ListTile(
-                          contentPadding: const EdgeInsets.all(0),
-                          title: Container(
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 3,
-                            ),
-                            padding: const EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: const Offset(0, 3),
-                                  color: Colors.grey.withOpacity(0.3),
-                                  blurRadius: 5,
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(meal.name),
-                          ),
-                        );
+                        return MealListTile(meal: meal);
                       },
                     ),
             )

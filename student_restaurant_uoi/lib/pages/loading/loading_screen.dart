@@ -26,17 +26,16 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
   }
 
   void setUp() async {
-    // if (await hasNetwork()) {
-    getMeals(mealsCallback, onMealError);
-    // } else {
-    //   const snackBar = SnackBar(
-    //     content: Text(
-    //       'Δεν υπάρχει σύνδεση στο διαδίκτυο',
-    //     ),
-    //   );
-
-    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    // }
+    if (await hasNetwork()) {
+      getMeals(mealsCallback, onMealError);
+    } else {
+      const snackBar = SnackBar(
+        content: Text(
+          'Δεν υπάρχει σύνδεση στο διαδίκτυο',
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   void onMealError() {
@@ -75,10 +74,12 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
 
   void programCallback(List<Program> program) {
     Provider.of<MealController>(context, listen: false).setProgram(program);
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => const MainScreen(),
+    Future.delayed(const Duration(seconds: 1)).then(
+      (value) => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const MainScreen(),
+        ),
       ),
     );
   }
@@ -86,6 +87,7 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(children: [
         const SizedBox(height: 150),
         Container(
@@ -99,7 +101,7 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
         ),
         const SizedBox(height: 20),
         const Text(
-          "Pame Lesxi?",
+          "Pame Lesxi",
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
