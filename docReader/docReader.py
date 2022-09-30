@@ -46,6 +46,7 @@ def read_table(table):
         if i == 1 or i == 2:
             for key in keys:
                 if "ή" in str(row_data[key]):
+                    
                     first_half, second_half = row_data[key].split("\nή\n")
                     first_half = re.sub('\n\n+', '\n\n', first_half)
                     first_dish, main_dish = first_half.split("\n\n")[:2]
@@ -123,6 +124,7 @@ def read_table(table):
                             # print('"extra2 Dish": "' + re.sub(' +', ' ', str(extra2).replace("\n", " ")) + '"')
                             # print("},")
                     dt = datetime.strptime(key+"/2022", "%d/%m/%Y")
+                    print(dt)
                     sql = "INSERT INTO program (date, meal_type, first_dish, main_dish, special_dish, side_dish1, side_dish2) VALUES('"+str(dt)+"', '" + \
                         foodType+"', '"+str(firstDishId)+"', '"+str(mainDishId)+"', '"+str(specialDishId)+"', '"+str(sideDish1Id)+"', '"+str(sideDish2Id)+"')"
                     cursor = conn.cursor()
@@ -132,7 +134,7 @@ def read_table(table):
 
 
 read_meals()
-document = Document('lesxh.docx')
+document = Document('oktovrios-2022.docx')
 for table in document.tables:
     read_table(table)
 
