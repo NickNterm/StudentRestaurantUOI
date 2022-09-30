@@ -35,8 +35,7 @@ class CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime lastDay = DateTime.now();
-
-    lastDay = DateTime(lastDay.year, lastDay.month + 1, 0);
+    lastDay = programDinner.last.date;
     return Scaffold(
       appBar: AppBar(title: const Text("Ημερολόγιο")),
       body: Column(
