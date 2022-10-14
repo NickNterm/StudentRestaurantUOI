@@ -5,7 +5,7 @@ import 'package:student_restaurant_uoi/pages/loading/loading_screen.dart';
 import 'package:student_restaurant_uoi/providers/meals_controller.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
