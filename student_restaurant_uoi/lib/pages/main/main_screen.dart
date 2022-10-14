@@ -53,19 +53,19 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Pame Lesxi UOI"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const InfoScreen(),
-                ),
-              );
-            },
-            icon: const Icon(Icons.info_outline_rounded),
-          )
-        ],
+//      actions: [
+//        IconButton(
+//          onPressed: () {
+//            Navigator.push(
+//              context,
+//              MaterialPageRoute(
+//                builder: (_) => const InfoScreen(),
+//              ),
+//            );
+//          },
+//          icon: const Icon(Icons.info_outline_rounded),
+//        )
+//      ],
       ),
       body: Column(
         children: [
