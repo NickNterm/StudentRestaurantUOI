@@ -32,20 +32,16 @@ class _MainScreenState extends State<MainScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller2.jumpToPage(
-        dinner
-            .indexWhere((element) => isDateEqual(element.date, DateTime.now())),
+        dinner.indexWhere((element) => isDateEqual(element.date, DateTime.now())),
       );
       controller1.jumpToPage(
-        lunch
-            .indexWhere((element) => isDateEqual(element.date, DateTime.now())),
+        lunch.indexWhere((element) => isDateEqual(element.date, DateTime.now())),
       );
     });
   }
 
   bool isDateEqual(DateTime date1, DateTime date2) {
-    return date1.year == date2.year &&
-        date1.month == date2.month &&
-        date1.day == date2.day;
+    return date1.year == date2.year && date1.month == date2.month && date1.day == date2.day;
   }
 
   @override
@@ -53,19 +49,19 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Pame Lesxi UOI"),
-//      actions: [
-//        IconButton(
-//          onPressed: () {
-//            Navigator.push(
-//              context,
-//              MaterialPageRoute(
-//                builder: (_) => const InfoScreen(),
-//              ),
-//            );
-//          },
-//          icon: const Icon(Icons.info_outline_rounded),
-//        )
-//      ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (_) => const InfoScreen(),
+        //         ),
+        //       );
+        //     },
+        //     icon: const Icon(Icons.info_outline_rounded),
+        //   )
+        //  ],
       ),
       body: Column(
         children: [
@@ -76,10 +72,7 @@ class _MainScreenState extends State<MainScreen> {
                   icon: Icons.calendar_month,
                   text: "Ημερολόγιο",
                   onPress: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const CalendarScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const CalendarScreen()));
                   },
                 ),
               ),
@@ -88,10 +81,7 @@ class _MainScreenState extends State<MainScreen> {
                   icon: Icons.restaurant,
                   text: "Ολα τα πιάτα",
                   onPress: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const AllPlatesScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const AllPlatesScreen()));
                   },
                 ),
               )
@@ -128,12 +118,6 @@ class _MainScreenState extends State<MainScreen> {
               },
             ),
           ),
-          // Container(
-          //   height: 60,
-          //   width: MediaQuery.of(context).size.width,
-          //   color: Colors.grey.shade300,
-          //   child: Text(""),
-          // )
         ],
       ),
     );

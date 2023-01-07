@@ -4,6 +4,7 @@ import 'package:student_restaurant_uoi/constants/colors.dart';
 import 'package:student_restaurant_uoi/models/program.dart';
 import 'package:student_restaurant_uoi/providers/meals_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/meal.dart';
 import '../main/components/main_day_card.dart';
@@ -22,20 +23,22 @@ class CalendarScreenState extends State<CalendarScreen> {
   List<Meal> meals = [];
   List<Program> programDinner = [];
   List<Program> programLunch = [];
+  DateTime firstDay = DateTime.now();
   @override
   void initState() {
     super.initState();
     meals = Provider.of<MealController>(context, listen: false).meals;
-    programDinner =
-        Provider.of<MealController>(context, listen: false).programDinner;
-    programLunch =
-        Provider.of<MealController>(context, listen: false).programLunch;
+    programDinner = Provider.of<MealController>(context, listen: false).programDinner;
+    programLunch = Provider.of<MealController>(context, listen: false).programLunch;
+    firstDay = programDinner[0].date;
   }
 
   @override
   Widget build(BuildContext context) {
     DateTime lastDay = DateTime.now();
-    lastDay = programDinner.last.date;
+    if (programLunch.last.date.isAfter(lastDay)) {
+      lastDay = programLunch.last.date;
+    }
     return Scaffold(
       appBar: AppBar(title: const Text("Ημερολόγιο")),
       body: Column(
@@ -60,93 +63,119 @@ class CalendarScreenState extends State<CalendarScreen> {
                 shape: BoxShape.circle,
               ),
             ),
-            firstDay: DateTime.parse("2022-09-01"),
+            firstDay: firstDay,
             focusedDay: focusedDate,
             lastDay: lastDay,
             calendarFormat: CalendarFormat.month,
             availableCalendarFormats: const {CalendarFormat.month: ""},
             onFormatChanged: null,
           ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ShowDayScreen(
-                      meals: meals,
-                      lunch: programLunch.firstWhere(
-                          (element) => isSameDay(element.date, selectedDate)),
-                      dinner: programDinner.firstWhere(
-                          (element) => isSameDay(element.date, selectedDate)),
+          programLunch.where((element) => isSameDay(element.date, selectedDate)).toList().isNotEmpty
+              ? Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ShowDayScreen(
+                            meals: meals,
+                            lunch: programLunch.firstWhere((element) => isSameDay(element.date, selectedDate)),
+                            dinner: programDinner.firstWhere((element) => isSameDay(element.date, selectedDate)),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: MainDayCard(
+                        day: programLunch.firstWhere((element) => isSameDay(element.date, selectedDate)),
+                        meals: meals,
+                        minimal: true,
+                        showTitle: true,
+                      ),
                     ),
                   ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: MainDayCard(
-                  day: programLunch.firstWhere(
-                      (element) => isSameDay(element.date, selectedDate)),
-                  meals: meals,
-                  minimal: true,
-                  showTitle: true,
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ShowDayScreen(
-                      meals: meals,
-                      lunch: programLunch.firstWhere(
-                          (element) => isSameDay(element.date, selectedDate)),
-                      dinner: programDinner.firstWhere(
-                          (element) => isSameDay(element.date, selectedDate)),
+                )
+              : Container(),
+          programDinner.where((element) => isSameDay(element.date, selectedDate)).toList().isNotEmpty
+              ? Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ShowDayScreen(
+                            meals: meals,
+                            lunch: programLunch.firstWhere((element) => isSameDay(element.date, selectedDate)),
+                            dinner: programDinner.firstWhere((element) => isSameDay(element.date, selectedDate)),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: MainDayCard(
+                        day: programDinner.firstWhere((element) => isSameDay(element.date, selectedDate)),
+                        meals: meals,
+                        minimal: true,
+                        showTitle: true,
+                      ),
                     ),
                   ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: MainDayCard(
-                  day: programDinner.firstWhere(
-                      (element) => isSameDay(element.date, selectedDate)),
-                  meals: meals,
-                  minimal: true,
-                  showTitle: true,
+                )
+              : Expanded(
+                  child: GestureDetector(
+                    onTap: () async {
+                      //launch url
+                      var url = "https://www.e-food.gr/";
+                      if (!await launchUrl(Uri.parse(url))) {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 27,
+                        vertical: 20,
+                      ),
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(0, 7),
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 8,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                          child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            "Η Λέσχη είναι κλειστή αυτήν την ημερομηνία",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Expanded(
+                            child: Image.asset(
+                              "assets/icons/efood.png",
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
           const SizedBox(height: 10)
-          // Expanded(
-          //   child: PageView.builder(
-          //     controller: controller,
-          //     itemCount: 2,
-          //     itemBuilder: (context, index) {
-          //       if (index == 0) {
-          //         return MainDayCard(
-          //           day: programLunch.firstWhere(
-          //               (element) => isSameDay(element.date, selectedDate)),
-          //           meals: meals,
-          //           showTitle: true,
-          //         );
-          //       } else {
-          //         return MainDayCard(
-          //           day: programDinner.firstWhere(
-          //               (element) => isSameDay(element.date, selectedDate)),
-          //           meals: meals,
-          //           showTitle: true,
-          //         );
-          //       }
-          //     },
-          //   ),
-          // ),
         ],
       ),
     );

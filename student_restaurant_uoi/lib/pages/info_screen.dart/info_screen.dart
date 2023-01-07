@@ -7,6 +7,11 @@ class InfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Πληροφορίες")),
+      body: Column(
+        children: [
+          const Text("Pame Lesxi UOI"),
+        ],
+      ),
     );
   }
 }

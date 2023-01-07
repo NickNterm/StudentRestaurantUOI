@@ -33,7 +33,9 @@ class MealApi implements MealApiInterface {
 
   @override
   void getProgram(Function callback, Function onError) async {
-    var url = "$baseUrl/program";
+    var startDate = DateTime.now();
+    startDate = DateTime(startDate.year, startDate.month - 2, startDate.day);
+    var url = "$baseUrl/program?start_date=01/${startDate.month}/${startDate.year}";
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

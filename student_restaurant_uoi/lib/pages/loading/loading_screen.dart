@@ -35,10 +35,8 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
     } else {
       var databasesPath = await getDatabasesPath();
       String dbpath = path.join(databasesPath, 'pamelesxi.db');
-      db = await openDatabase(dbpath, version: 1,
-          onCreate: (Database db, int version) async {
-        await db.execute(
-            'CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
+      db = await openDatabase(dbpath, version: 1, onCreate: (Database db, int version) async {
+        await db.execute('CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
         await db.execute(
             'CREATE TABLE IF NOT EXISTS program (id INTEGER PRIMARY KEY, date TEXT, meal_type TEXT, first_dish INTEGER, main_dish INTEGER, special_dish INTEGER, side_dish1 INTEGER, side_dish2 INTEGER);');
       });
@@ -48,6 +46,7 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
       for (var meal in meals) {
         mealList.add(Meal.fromApi(meal));
       }
+      if (!mounted) return;
       Provider.of<MealController>(context, listen: false).setMeals(mealList);
 
       List<Map> program = await db.rawQuery("SELECT * FROM program");
@@ -55,8 +54,8 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
       for (var day in program) {
         programList.add(Program.fromApi(day));
       }
-      Provider.of<MealController>(context, listen: false)
-          .setProgram(programList);
+      if (!mounted) return;
+      Provider.of<MealController>(context, listen: false).setProgram(programList);
       await db.close();
       if (meals.isNotEmpty) {
         Future.delayed(const Duration(seconds: 1)).then(
@@ -73,6 +72,7 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
             'Δεν υπάρχει σύνδεση στο διαδίκτυο',
           ),
         );
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }
@@ -101,18 +101,15 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
     var databasesPath = await getDatabasesPath();
     String dbpath = path.join(databasesPath, 'pamelesxi.db');
 
-    Database database = await openDatabase(dbpath, version: 1,
-        onCreate: (Database db, int version) async {
-      await db.execute(
-          'CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
+    Database database = await openDatabase(dbpath, version: 1, onCreate: (Database db, int version) async {
+      await db.execute('CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
       await db.execute(
           'CREATE TABLE IF NOT EXISTS program (id INTEGER PRIMARY KEY, date TEXT, meal_type TEXT, first_dish INTEGER, main_dish INTEGER, special_dish INTEGER, side_dish1 INTEGER, side_dish2 INTEGER);');
     });
     db = database;
     await db.execute("DROP TABLE meals");
     await db.execute("DROP TABLE program");
-    await db.execute(
-        'CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
+    await db.execute('CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
     await db.execute(
         'CREATE TABLE IF NOT EXISTS program (id INTEGER PRIMARY KEY, date TEXT, meal_type TEXT, first_dish INTEGER, main_dish INTEGER, special_dish INTEGER, side_dish1 INTEGER, side_dish2 INTEGER);');
   }
