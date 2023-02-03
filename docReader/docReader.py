@@ -123,7 +123,7 @@ def read_table(table):
                             # print('"extra1 Dish": "' + re.sub(' +', ' ', str(extra1).replace("\n", " ")) + '",')
                             # print('"extra2 Dish": "' + re.sub(' +', ' ', str(extra2).replace("\n", " ")) + '"')
                             # print("},")
-                    dt = datetime.strptime(key+"/2022", "%d/%m/%Y")
+                    dt = datetime.strptime(key+"/2023", "%d/%m/%Y")
                     print(dt)
                     sql = "INSERT INTO program (date, meal_type, first_dish, main_dish, special_dish, side_dish1, side_dish2) VALUES('"+str(dt)+"', '" + \
                         foodType+"', '"+str(firstDishId)+"', '"+str(mainDishId)+"', '"+str(specialDishId)+"', '"+str(sideDish1Id)+"', '"+str(sideDish2Id)+"')"
@@ -134,7 +134,7 @@ def read_table(table):
 
 
 read_meals()
-document = Document('programma-sitisis-noemvrioy-2022.docx')
+document = Document('programma-sitisis-ianoyarios-2023.docx')
 for table in document.tables:
     read_table(table)
 
