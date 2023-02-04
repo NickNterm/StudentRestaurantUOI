@@ -81,8 +81,7 @@ def get_program(
 
 @app.get("/special")
 def get_special():
-    return
-    [
+    return [
         {
             "name": "Valentines Day",
             "date": "14/02/2021",
