@@ -6,6 +6,8 @@ import 'package:student_restaurant_uoi/models/program.dart';
 import 'package:student_restaurant_uoi/services/interfaces/meal_api_interface.dart';
 import 'package:http/http.dart' as http;
 
+import '../../models/special_day.dart';
+
 class MealApi implements MealApiInterface {
   @override
   void getMeals(Function callback, Function onError) async {
@@ -35,7 +37,8 @@ class MealApi implements MealApiInterface {
   void getProgram(Function callback, Function onError) async {
     var startDate = DateTime.now();
     startDate = DateTime(startDate.year, startDate.month - 2, startDate.day);
-    var url = "$baseUrl/program?start_date=01/${startDate.month}/${startDate.year}";
+    var url =
+        "$baseUrl/program?start_date=01/${startDate.month}/${startDate.year}";
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -52,6 +55,30 @@ class MealApi implements MealApiInterface {
         program.add(Program.fromApi(day));
       }
       callback(program);
+    } else {
+      onError();
+    }
+  }
+
+  @override
+  void getSpecial(Function callback, Function onError) async {
+    var url = "$baseUrl/special";
+    var response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    );
+    if (response.statusCode == 200) {
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+      List<SpecialDay> specialDays = [];
+      for (var day in data) {
+        specialDays.add(SpecialDay.fromApi(day));
+      }
+      callback(specialDays);
     } else {
       onError();
     }

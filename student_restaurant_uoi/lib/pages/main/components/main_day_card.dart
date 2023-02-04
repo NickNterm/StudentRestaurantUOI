@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:student_restaurant_uoi/providers/meals_controller.dart';
 
 import '../../../constants/colors.dart';
 import '../../../models/meal.dart';
 import '../../../models/program.dart';
+import '../../../models/special_day.dart';
 
 class MainDayCard extends StatelessWidget {
+  final Program day;
+
+  final bool showTitle;
+  final bool minimal;
+  final List<Meal> meals;
   const MainDayCard(
       {Key? key,
       required this.day,
@@ -13,25 +21,30 @@ class MainDayCard extends StatelessWidget {
       this.minimal = false,
       this.showTitle = false})
       : super(key: key);
-
-  final Program day;
-  final bool showTitle;
-  final bool minimal;
-  final List<Meal> meals;
-  bool isDateEqual(DateTime date1, DateTime date2) {
-    return date1.year == date2.year &&
-        date1.month == date2.month &&
-        date1.day == date2.day;
-  }
-
   @override
   Widget build(BuildContext context) {
+    SpecialDay specialDay =
+        Provider.of<MealController>(context).specialDays.firstWhere(
+              (element) => isDayEqual(element.date, day.date),
+              orElse: () => SpecialDay(
+                backgroundImage:
+                    'https://images.unsplash.com/photo-1604147706283-d7119b5b822c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d2hpdGV8ZW58MHx8MHx8&w=1000&q=80',
+                date: day.date,
+                name: '',
+                opacity: 0,
+              ),
+            );
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 7),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
+          image: DecorationImage(
+            image: NetworkImage(specialDay.backgroundImage),
+            opacity: specialDay.opacity,
+            fit: BoxFit.cover,
+          ),
           boxShadow: [
             BoxShadow(
               offset: const Offset(0, 7),
@@ -120,7 +133,8 @@ class MainDayCard extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              padding:
+                                  const EdgeInsets.only(top: 25, bottom: 30),
                               child: VerticalDivider(
                                 color: Colors.grey.withOpacity(0.4),
                                 width: 0,
@@ -268,9 +282,30 @@ class MainDayCard extends StatelessWidget {
                     ),
                   )
                 : Container(),
-          )
+          ),
+          Positioned(
+              bottom: 6,
+              child: Text(
+                specialDay.name,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[600],
+                  fontSize: 16,
+                  fontStyle: FontStyle.italic,
+                ),
+              )),
         ],
       ),
     );
+  }
+
+  bool isDateEqual(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
+
+  bool isDayEqual(DateTime date1, DateTime date2) {
+    return date1.day == date2.day && date1.month == date2.month;
   }
 }
