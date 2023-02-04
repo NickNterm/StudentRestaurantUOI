@@ -85,7 +85,7 @@ def get_special():
         {
             "name": "Valentines Day",
             "date": "2022-02-14T00:00:00",
-            "opacity": 0.2,
+            "opacity": 0.1,
             "background_image": "https://media-api.xogrp.com/images/cd6cc4b1-7e42-462c-8b75-d0d79be36972",
         },
 
