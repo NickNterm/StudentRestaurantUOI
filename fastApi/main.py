@@ -78,3 +78,17 @@ def get_program(
         models.Program.date <= datetime.strptime(end_date, '%d/%m/%Y'),
     ).all()
 
+
+@app.get("/special")
+def get_special():
+    return {
+        [
+            {
+                "name": "Valentines Day",
+                "date": "14/02/2021",
+                "opacity": 0.5,
+                "background_image": "https://images.unsplash.com/photo-1604147706283-d7119b5b822c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d2hpdGV8ZW58MHx8MHx8&w=1000&q=80",
+            },
+
+        ]
+    }
