@@ -46,7 +46,7 @@ def read_table(table):
         if i == 1 or i == 2:
             for key in keys:
                 if "ή" in str(row_data[key]):
-                    
+
                     first_half, second_half = row_data[key].split("\nή\n")
                     first_half = re.sub('\n\n+', '\n\n', first_half)
                     first_dish, main_dish = first_half.split("\n\n")[:2]
@@ -55,18 +55,24 @@ def read_table(table):
                     extra = re.sub('\n+', '\n', extra)
                     extra1, extra2 = extra.split("\n")[:2]
 
-                    firstDish = re.sub(' +', ' ', str(first_dish).replace("\n", " ")).strip()
-                    mainDish = re.sub(' +', ' ', str(main_dish).replace("\n", " ")).strip()
-                    specialDish = re.sub(' +', ' ', str(special_dish).replace("\n", " ")).strip()
-                    sideDish1 = re.sub(' +', ' ', str(extra1).replace("\n", " ")).strip()
-                    sideDish2 = re.sub(' +', ' ', str(extra2).replace("\n", " ")).strip()
+                    firstDish = re.sub(
+                        ' +', ' ', str(first_dish).replace("\n", " ")).strip()
+                    mainDish = re.sub(
+                        ' +', ' ', str(main_dish).replace("\n", " ")).strip()
+                    specialDish = re.sub(
+                        ' +', ' ', str(special_dish).replace("\n", " ")).strip()
+                    sideDish1 = re.sub(
+                        ' +', ' ', str(extra1).replace("\n", " ")).strip()
+                    sideDish2 = re.sub(
+                        ' +', ' ', str(extra2).replace("\n", " ")).strip()
 
                     all_fields_set = False
                     while not all_fields_set:
                         if firstDish.upper() in meals.keys():
                             firstDishId = meals[firstDish.upper()]
                         else:
-                            sql_insert = "INSERT INTO meals (name) VALUES ('"+firstDish+"');"
+                            sql_insert = "INSERT INTO meals (name) VALUES ('" + \
+                                firstDish+"');"
                             cursor = conn.cursor()
                             cursor.execute(sql_insert)
                             conn.commit()
@@ -76,7 +82,8 @@ def read_table(table):
                         if mainDish.upper() in meals.keys():
                             mainDishId = meals[mainDish.upper()]
                         else:
-                            sql_insert = "INSERT INTO meals (name) VALUES ('"+mainDish+"');"
+                            sql_insert = "INSERT INTO meals (name) VALUES ('" + \
+                                mainDish+"');"
                             cursor = conn.cursor()
                             cursor.execute(sql_insert)
                             conn.commit()
@@ -86,7 +93,8 @@ def read_table(table):
                         if specialDish.upper() in meals.keys():
                             specialDishId = meals[specialDish.upper()]
                         else:
-                            sql_insert = "INSERT INTO meals (name) VALUES ('"+specialDish+"');"
+                            sql_insert = "INSERT INTO meals (name) VALUES ('" + \
+                                specialDish+"');"
                             cursor = conn.cursor()
                             cursor.execute(sql_insert)
                             conn.commit()
@@ -96,7 +104,8 @@ def read_table(table):
                         if sideDish1.upper() in meals.keys():
                             sideDish1Id = meals[sideDish1.upper()]
                         else:
-                            sql_insert = "INSERT INTO meals (name) VALUES ('"+sideDish1+"');"
+                            sql_insert = "INSERT INTO meals (name) VALUES ('" + \
+                                sideDish1+"');"
                             cursor = conn.cursor()
                             cursor.execute(sql_insert)
                             conn.commit()
@@ -107,7 +116,8 @@ def read_table(table):
                             sideDish2Id = meals[sideDish2.upper()]
                             all_fields_set = True
                         else:
-                            sql_insert = "INSERT INTO meals (name) VALUES ('"+sideDish2+"');"
+                            sql_insert = "INSERT INTO meals (name) VALUES ('" + \
+                                sideDish2+"');"
                             cursor = conn.cursor()
                             cursor.execute(sql_insert)
                             conn.commit()
@@ -126,7 +136,8 @@ def read_table(table):
                     dt = datetime.strptime(key+"/2023", "%d/%m/%Y")
                     print(dt)
                     sql = "INSERT INTO program (date, meal_type, first_dish, main_dish, special_dish, side_dish1, side_dish2) VALUES('"+str(dt)+"', '" + \
-                        foodType+"', '"+str(firstDishId)+"', '"+str(mainDishId)+"', '"+str(specialDishId)+"', '"+str(sideDish1Id)+"', '"+str(sideDish2Id)+"')"
+                        foodType+"', '"+str(firstDishId)+"', '"+str(mainDishId)+"', '"+str(
+                            specialDishId)+"', '"+str(sideDish1Id)+"', '"+str(sideDish2Id)+"')"
                     cursor = conn.cursor()
                     cursor.execute(sql)
                     conn.commit()
@@ -134,7 +145,7 @@ def read_table(table):
 
 
 read_meals()
-document = Document('programma-fevroyarios-2023.docx')
+document = Document('programma-sitisis-martios-2023.docx')
 for table in document.tables:
     read_table(table)
 
