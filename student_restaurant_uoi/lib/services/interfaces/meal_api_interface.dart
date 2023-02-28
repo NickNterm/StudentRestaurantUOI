@@ -7,4 +7,8 @@ abstract class MealApiInterface {
     Function callback,
     Function onError,
   );
+  void getSpecial(
+    Function callback,
+    Function onError,
+  );
 }

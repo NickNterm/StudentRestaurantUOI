@@ -6,6 +6,7 @@ import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:student_restaurant_uoi/constants/colors.dart';
+import 'package:student_restaurant_uoi/models/special_day.dart';
 import 'package:student_restaurant_uoi/pages/main/main_screen.dart';
 import 'package:student_restaurant_uoi/providers/meals_controller.dart';
 import 'package:student_restaurant_uoi/services/api/meal_api.dart';
@@ -35,8 +36,10 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
     } else {
       var databasesPath = await getDatabasesPath();
       String dbpath = path.join(databasesPath, 'pamelesxi.db');
-      db = await openDatabase(dbpath, version: 1, onCreate: (Database db, int version) async {
-        await db.execute('CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
+      db = await openDatabase(dbpath, version: 1,
+          onCreate: (Database db, int version) async {
+        await db.execute(
+            'CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
         await db.execute(
             'CREATE TABLE IF NOT EXISTS program (id INTEGER PRIMARY KEY, date TEXT, meal_type TEXT, first_dish INTEGER, main_dish INTEGER, special_dish INTEGER, side_dish1 INTEGER, side_dish2 INTEGER);');
       });
@@ -55,7 +58,8 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
         programList.add(Program.fromApi(day));
       }
       if (!mounted) return;
-      Provider.of<MealController>(context, listen: false).setProgram(programList);
+      Provider.of<MealController>(context, listen: false)
+          .setProgram(programList);
       await db.close();
       if (meals.isNotEmpty) {
         Future.delayed(const Duration(seconds: 1)).then(
@@ -101,15 +105,18 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
     var databasesPath = await getDatabasesPath();
     String dbpath = path.join(databasesPath, 'pamelesxi.db');
 
-    Database database = await openDatabase(dbpath, version: 1, onCreate: (Database db, int version) async {
-      await db.execute('CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
+    Database database = await openDatabase(dbpath, version: 1,
+        onCreate: (Database db, int version) async {
+      await db.execute(
+          'CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
       await db.execute(
           'CREATE TABLE IF NOT EXISTS program (id INTEGER PRIMARY KEY, date TEXT, meal_type TEXT, first_dish INTEGER, main_dish INTEGER, special_dish INTEGER, side_dish1 INTEGER, side_dish2 INTEGER);');
     });
     db = database;
     await db.execute("DROP TABLE meals");
     await db.execute("DROP TABLE program");
-    await db.execute('CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
+    await db.execute(
+        'CREATE TABLE meals (id INTEGER PRIMARY KEY, name TEXT, image TEXT);');
     await db.execute(
         'CREATE TABLE IF NOT EXISTS program (id INTEGER PRIMARY KEY, date TEXT, meal_type TEXT, first_dish INTEGER, main_dish INTEGER, special_dish INTEGER, side_dish1 INTEGER, side_dish2 INTEGER);');
   }
@@ -144,6 +151,22 @@ class _LoadingScreenState extends State<LoadingScreen> with MealApi {
         );
       }
     });
+    getSpecial(specialCallback, onSpecialError);
+  }
+
+  void specialCallback(List<SpecialDay> special) async {
+    Provider.of<MealController>(context, listen: false).setSpecialDays(special);
+    Future.delayed(const Duration(seconds: 1)).then(
+      (value) => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const MainScreen(),
+        ),
+      ),
+    );
+  }
+
+  void onSpecialError() {
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => Navigator.pushReplacement(
         context,
