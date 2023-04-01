@@ -145,7 +145,7 @@ def read_table(table):
 
 
 read_meals()
-document = Document('programma-sitisis-martios-2023.docx')
+document = Document('programma-sitisis-aprilios-2023.docx')
 for table in document.tables:
     read_table(table)
 
