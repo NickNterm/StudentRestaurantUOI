@@ -9,5 +9,4 @@ In this repository you can find:
  - the fast api that takes the data from the postgress server
  - the doc reader that parses the .docx file to the database
  
- Technologies Used in this Project
- Flutter, Postgress, FastAPI, Python
+ Technologies Used in this Project: Flutter, Postgress, FastAPI, Python
