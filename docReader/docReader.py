@@ -29,8 +29,6 @@ sideDish2 = 0
 
 def read_table(table):
     data = []
-
-    keys = None
     for i, row in enumerate(table.rows):
         text = (cell.text for cell in row.cells[2:])
         if i == 0:
