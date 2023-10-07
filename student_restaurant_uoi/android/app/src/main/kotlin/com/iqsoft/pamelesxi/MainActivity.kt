@@ -1,4 +1,4 @@
-package com.example.student_restaurant_uoi
+package com.iqsoft.pamelesxi
 
 import io.flutter.embedding.android.FlutterActivity
 

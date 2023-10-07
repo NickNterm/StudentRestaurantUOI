@@ -18,6 +18,7 @@ class MyIconButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(20),
       height: 50,
+      constraints: const BoxConstraints(maxWidth: 300),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(

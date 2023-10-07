@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1089166131283",
+    "project_id": "pamelesxi-5182d",
+    "storage_bucket": "pamelesxi-5182d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1089166131283:android:3503a3ff115e822d2846a6",
+        "android_client_info": {
+          "package_name": "com.iqsoft.pamelesxi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcl3SRRDIMRF4_QmLMZh6rjUbLapPTJ8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
