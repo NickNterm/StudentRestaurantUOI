@@ -1,39 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:student_restaurant_uoi/providers/meals_controller.dart';
-
-import '../../../constants/colors.dart';
-import '../../../models/meal.dart';
-import '../../../models/program.dart';
-import '../../../models/special_day.dart';
+import 'package:student_restaurant_uoi/features/loading_feature/domain/entities/day_menu.dart';
 
 class MainDayCard extends StatelessWidget {
-  final Program day;
+  const MainDayCard({
+    Key? key,
+    required this.day,
+    this.minimal = false,
+    this.showTitle = false,
+  }) : super(key: key);
+
+  final DayMenu day;
 
   final bool showTitle;
   final bool minimal;
-  final List<Meal> meals;
-  const MainDayCard(
-      {Key? key,
-      required this.day,
-      required this.meals,
-      this.minimal = false,
-      this.showTitle = false})
-      : super(key: key);
   @override
   Widget build(BuildContext context) {
-    SpecialDay specialDay =
-        Provider.of<MealController>(context).specialDays.firstWhere(
-              (element) => isDayEqual(element.date, day.date),
-              orElse: () => SpecialDay(
-                backgroundImage:
-                    'https://images.unsplash.com/photo-1604147706283-d7119b5b822c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d2hpdGV8ZW58MHx8MHx8&w=1000&q=80',
-                date: day.date,
-                name: '',
-                opacity: 0,
-              ),
-            );
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 7),
       width: MediaQuery.of(context).size.width,
@@ -67,10 +49,7 @@ class MainDayCard extends StatelessWidget {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                     Text(
-                      meals
-                          .where((element) => element.id == day.mainDish)
-                          .first
-                          .name,
+                      'Name',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.grey.shade600,
@@ -78,10 +57,6 @@ class MainDayCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      meals
-                          .where((element) => element.id == day.specialDish)
-                          .first
-                          .name,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.grey.shade600,

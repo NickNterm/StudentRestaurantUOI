@@ -8,7 +8,7 @@ class MenuModel extends Menu {
     required super.daysMenu,
   });
 
-  factory MenuModel.fromJson(Map<String, dynamic> json) {
+  factory MenuModel.fromJson(Map<dynamic, dynamic> json) {
     List<DayMenu> daysMenu = [];
     for (var dayMenu in json['days_menu']) {
       daysMenu.add(DayMenuModel.fromJson(dayMenu));
