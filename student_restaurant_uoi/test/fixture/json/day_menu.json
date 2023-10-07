@@ -1,0 +1,57 @@
+{
+  "date": "2021-08-10T00:00:00.000Z",
+  "dinner": {
+    "first_dish": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    },
+    "main_dish": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    },
+    "special_dish": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    },
+    "side_dish1": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    },
+    "side_dish2": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    }
+  },
+  "lunch": {
+    "first_dish": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    },
+    "main_dish": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    },
+    "special_dish": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    },
+    "side_dish1": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    },
+    "side_dish2": {
+      "id": 1,
+      "image": "Image Url",
+      "name": "Dish Name"
+    }
+  }
+}

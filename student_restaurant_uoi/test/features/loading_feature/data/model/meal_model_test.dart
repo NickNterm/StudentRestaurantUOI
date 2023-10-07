@@ -25,14 +25,14 @@ void main() {
     // act
     final result = MealModel.fromJson(jsonMap);
     // assert
-    expect(result, MealModel.testModel());
+    expect(result, MealModel.testData());
   });
 
   test('should return a json from the MealModel', () {
     // arrange
     final Map<String, dynamic> jsonMap = jsonDecode(fixture('meal.json'));
     // act
-    final result = MealModel.testModel().toJson();
+    final result = MealModel.testData().toJson();
     // assert
     expect(jsonMap, equals(result));
   });
