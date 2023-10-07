@@ -1,0 +1,68 @@
+body {
+  font-family: "Ubuntu", sans-serif;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#form-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+}
+
+#mainContainer {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#container {
+  position: relative;
+  width: 500px;
+  border: 2px dashed #000;
+  border-radius: 20px;
+}
+
+#continueButton {
+  display: none;
+  width: 100px;
+  background: #fff;
+  color: #ff724c;
+  border: 2px solid #ff724c;
+}
+
+#container div {
+  margin: 0;
+  color: #7a7a7a;
+}
+
+#container div p {
+  font-size: 20px;
+}
+
+#container div div {
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  background: #ff724c;
+  text-align: center;
+  line-height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#container input {
+  position: absolute;
+  margin: 10px;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+}
