@@ -7,11 +7,27 @@ class MealModel extends Meal {
     required super.name,
   });
 
-  factory MealModel.fromApi(Map data) {
+  factory MealModel.fromJson(Map data) {
     return MealModel(
       id: data["id"],
       image: data["image"],
       name: data["name"],
     );
+  }
+
+  factory MealModel.testModel() {
+    return const MealModel(
+      id: 1,
+      image: "Image Url",
+      name: "Meal Name",
+    );
+  }
+
+  Map toJson() {
+    return {
+      "id": id,
+      "image": image,
+      "name": name,
+    };
   }
 }

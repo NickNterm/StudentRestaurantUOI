@@ -10,15 +10,40 @@ class ProgramModel extends Program {
     required super.sideDish1,
     required super.sideDish2,
   });
-  factory ProgramModel.fromApi(Map data) {
+
+  factory ProgramModel.fromJson(Map<String, dynamic> json) {
     return ProgramModel(
-      date: DateTime.parse(data["date"]),
-      type: data["meal_type"],
-      firstDish: data["first_dish"],
-      mainDish: data["main_dish"],
-      specialDish: data["special_dish"],
-      sideDish1: data["side_dish1"],
-      sideDish2: data["side_dish2"],
+      date: DateTime.parse(json["date"]),
+      type: json["meal_type"],
+      firstDish: json["first_dish"],
+      mainDish: json["main_dish"],
+      specialDish: json["special_dish"],
+      sideDish1: json["side_dish1"],
+      sideDish2: json["side_dish2"],
     );
+  }
+
+  factory ProgramModel.testData() {
+    return ProgramModel(
+      date: DateTime.parse("2021-08-10T00:00:00.000000Z"),
+      type: "meal",
+      firstDish: 1,
+      mainDish: 2,
+      specialDish: 3,
+      sideDish1: 4,
+      sideDish2: 5,
+    );
+  }
+
+  Map toJson() {
+    return {
+      "date": date.toIso8601String(),
+      "meal_type": type,
+      "first_dish": firstDish,
+      "main_dish": mainDish,
+      "special_dish": specialDish,
+      "side_dish1": sideDish1,
+      "side_dish2": sideDish2,
+    };
   }
 }
