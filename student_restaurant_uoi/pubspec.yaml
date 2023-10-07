@@ -29,6 +29,8 @@ dependencies:
   get_it: ^7.6.4
   change_app_package_name: ^1.1.0
   firebase_analytics: ^10.5.0
+  equatable: ^2.0.5
+  mocktail: ^1.0.1
 
 dev_dependencies:
   flutter_test:
