@@ -30,7 +30,7 @@ class LoadingLocalDataSourceImpl extends LoadingLocalDataSource {
   @override
   Future<MenuModel> getMenu() async {
     final menu = sharedPreferences.getString(menuKey);
-    if (menu != null) {
+    if (menu != null && menu.isNotEmpty) {
       return MenuModel.fromJson(
         jsonDecode(menu),
       );

@@ -2,14 +2,15 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:provider/provider.dart';
-import 'package:student_restaurant_uoi/constants/colors.dart';
-import 'package:student_restaurant_uoi/cubit/in_app_message/in_app_message_cubit.dart';
+import 'package:student_restaurant_uoi/core/constants/colors.dart';
 import 'package:student_restaurant_uoi/dependency/injection.dart';
+import 'package:student_restaurant_uoi/features/loading_feature/presentation/bloc/menu/menu_bloc.dart';
+import 'package:student_restaurant_uoi/features/loading_feature/presentation/bloc/special_days/special_days_bloc.dart';
+import 'package:student_restaurant_uoi/features/loading_feature/presentation/page/loading_page.dart';
+import 'package:student_restaurant_uoi/features/main_feature/presentation/cubit/in_app_message/in_app_message_cubit.dart';
 import 'package:student_restaurant_uoi/firebase_options.dart';
-import 'package:student_restaurant_uoi/pages/loading/loading_screen.dart';
-import 'package:student_restaurant_uoi/providers/meals_controller.dart';
 import 'package:flutter/services.dart';
 
 @pragma('vm:entry-point')
@@ -17,7 +18,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   FirebaseAnalytics.instance.logEvent(
     name: 'message_received_on_background',
     parameters: message.data,
@@ -135,31 +135,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider<MealController>(
-          create: (context) => MealController(),
+        BlocProvider<InAppMessageCubit>(
+          create: (context) => sl<InAppMessageCubit>(),
+        ),
+        BlocProvider<MenuBloc>(
+          create: (context) => sl<MenuBloc>(),
+        ),
+        BlocProvider<SpecialDaysBloc>(
+          create: (context) => sl<SpecialDaysBloc>(),
         ),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
         title: 'Pame Lesxi UOI',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: const ColorScheme.light().copyWith(
-            primary: kPrimaryColor,
-            secondary: kSecondaryColor,
-          ),
+          colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
           appBarTheme: AppBarTheme.of(context).copyWith(
             centerTitle: true,
             elevation: 7,
             surfaceTintColor: Colors.white,
             shadowColor: Colors.grey.withOpacity(0.4),
           ),
-          scaffoldBackgroundColor: kWhiteColor,
-          primaryColor: kPrimaryColor,
         ),
-        home: const LoadingScreen(),
+        home: const LoadingPage(),
       ),
     );
   }

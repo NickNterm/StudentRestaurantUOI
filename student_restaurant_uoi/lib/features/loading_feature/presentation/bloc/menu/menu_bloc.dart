@@ -1,6 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-import 'package:student_restaurant_uoi/features/loading_feature/data/model/menu_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_restaurant_uoi/features/loading_feature/domain/entities/menu.dart';
 import 'package:student_restaurant_uoi/features/loading_feature/domain/use_case/get_menu_use_case.dart';
 part 'menu_event.dart';

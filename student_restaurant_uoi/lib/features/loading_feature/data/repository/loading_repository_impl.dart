@@ -29,7 +29,6 @@ class LoadingRepositoryImpl extends LoadingRepository {
     if (await networkInfo.isConnected) {
       try {
         final result = await remoteDataSource.getMenu();
-
         try {
           localDataSource.cacheMenu(result);
         } catch (_) {}

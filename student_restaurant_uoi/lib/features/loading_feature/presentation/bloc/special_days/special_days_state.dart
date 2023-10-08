@@ -1,6 +1,5 @@
 part of 'special_days_bloc.dart';
 
-@immutable
 abstract class SpecialDaysState {}
 
 class SpecialDaysInitial extends SpecialDaysState {}

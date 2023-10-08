@@ -1,5 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_restaurant_uoi/features/loading_feature/domain/entities/special_day.dart';
 import 'package:student_restaurant_uoi/features/loading_feature/domain/use_case/get_special_days_use_case.dart';
 part 'special_days_event.dart';
