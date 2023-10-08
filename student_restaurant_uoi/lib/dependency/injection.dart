@@ -1,9 +1,12 @@
 import 'package:get_it/get_it.dart';
-import 'package:student_restaurant_uoi/cubit/in_app_message/in_app_message_cubit.dart';
+import 'package:student_restaurant_uoi/dependency/core_injection.dart';
+import 'package:student_restaurant_uoi/dependency/loading_injection.dart';
+import 'package:student_restaurant_uoi/dependency/main_injection.dart';
 
 var sl = GetIt.instance;
+
 void init() {
-  sl.registerLazySingleton(
-    () => InAppMessageCubit(),
-  );
+  initCore();
+  initMain();
+  initLoading();
 }

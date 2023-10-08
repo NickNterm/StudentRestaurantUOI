@@ -22,7 +22,7 @@ class LoadingLocalDataSourceImpl extends LoadingLocalDataSource {
   Future<MenuModel> cacheMenu(MenuModel menuModel) async {
     await sharedPreferences.setString(
       menuKey,
-      menuModel.toJson().toString(),
+      jsonEncode(menuModel.toJson()),
     );
     return menuModel;
   }

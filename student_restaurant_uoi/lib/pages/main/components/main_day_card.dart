@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:student_restaurant_uoi/core/constants/colors.dart';
 import 'package:student_restaurant_uoi/features/loading_feature/domain/entities/day_menu.dart';
 
 class MainDayCard extends StatelessWidget {
   const MainDayCard({
     Key? key,
     required this.day,
+    required this.type,
     this.minimal = false,
     this.showTitle = false,
   }) : super(key: key);
@@ -14,6 +16,7 @@ class MainDayCard extends StatelessWidget {
 
   final bool showTitle;
   final bool minimal;
+  final String type;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,6 +60,7 @@ class MainDayCard extends StatelessWidget {
                       ),
                     ),
                     Text(
+                      'Name',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.grey.shade600,
@@ -93,11 +97,7 @@ class MainDayCard extends StatelessWidget {
                                         fontSize: 18),
                                   ),
                                   Text(
-                                    meals
-                                        .where((element) =>
-                                            element.id == day.firstDish)
-                                        .first
-                                        .name,
+                                    'firstDish.name',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.grey.shade600,
@@ -127,22 +127,14 @@ class MainDayCard extends StatelessWidget {
                                         fontSize: 18),
                                   ),
                                   Text(
-                                    meals
-                                        .where((element) =>
-                                            element.id == day.sideDish1)
-                                        .first
-                                        .name,
+                                    'sideDish1.name',
                                     style: TextStyle(
                                       color: Colors.grey.shade600,
                                       fontStyle: FontStyle.italic,
                                     ),
                                   ),
                                   Text(
-                                    meals
-                                        .where((element) =>
-                                            element.id == day.sideDish2)
-                                        .first
-                                        .name,
+                                    'sideDish2.name',
                                     style: TextStyle(
                                       color: Colors.grey.shade600,
                                       fontStyle: FontStyle.italic,
@@ -249,7 +241,7 @@ class MainDayCard extends StatelessWidget {
             top: 5,
             child: showTitle
                 ? Text(
-                    day.type == "dinner" ? "Δείπνο" : "Μεσημεριανό",
+                    type == "dinner" ? "Δείπνο" : "Μεσημεριανό",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
@@ -261,7 +253,7 @@ class MainDayCard extends StatelessWidget {
           Positioned(
               bottom: 6,
               child: Text(
-                specialDay.name,
+                'specialDish.name',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: Colors.grey[600],
