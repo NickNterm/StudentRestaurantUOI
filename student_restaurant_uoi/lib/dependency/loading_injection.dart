@@ -6,12 +6,24 @@ import 'package:student_restaurant_uoi/features/loading_feature/domain/repositor
 import 'package:student_restaurant_uoi/features/loading_feature/domain/use_case/get_menu_use_case.dart';
 import 'package:student_restaurant_uoi/features/loading_feature/domain/use_case/get_special_days_use_case.dart';
 import 'package:student_restaurant_uoi/features/loading_feature/presentation/bloc/menu/menu_bloc.dart';
+import 'package:student_restaurant_uoi/features/loading_feature/presentation/bloc/network_connection/network_connection_bloc.dart';
+import 'package:student_restaurant_uoi/features/loading_feature/presentation/bloc/special_days/special_days_bloc.dart';
 
 void initLoading() {
   // Bloc
   sl.registerLazySingleton(
     () => MenuBloc(
       getMenuUseCase: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => SpecialDaysBloc(
+      getSpecialDays: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => NetworkConnectionBloc(
+      networkInfo: sl(),
     ),
   );
 
